@@ -1,6 +1,6 @@
 # IDE 관련
 .classpath
-.project
+# .project
 .settings/
 
 # 빌드 디렉토리
