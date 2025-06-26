@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MemberMapper">
+	<insert id="insert">
+	insert into tbl_member (id, pw, name, email) values (#{id}, #{pw}, #{name}, #{email})
+	</insert>
+	<select id="findById" resultType="domain.Member">
+	select * from tbl_member where id = #{id}
+	</select>
+	<resultMap type="member" id="memberMap">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+	</resultMap>
+	
+	<select id="findByIdMap" resultMap="memberMap">
+	select * from tbl_member where id = #{id}
+	</select>
+</mapper>

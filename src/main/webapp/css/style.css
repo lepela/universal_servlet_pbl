@@ -1,0 +1,59 @@
+/* common */
+html {scroll-behavior: smooth;}
+body {margin: 0; }
+a {text-decoration: none; color: #222;}
+header, footer {padding: 1em; background: #222; color: #eee; text-align: center;}
+
+
+.resize-none {resize: none;}
+.container {max-width: 1200px; margin: 0 auto; }
+/* cke 경고창 무시용 */
+.cke_notifications_area {display: none !important;} 
+
+
+/* nav */
+nav {background: #eee;}
+nav ul {margin: 0; padding: 0; }
+nav li {display: inline;}
+nav li a {display: inline-block; padding: 1em; width: 140px; text-align: center;}
+nav li a:hover {background-color: #222; color: #eee; text-decoration: underline;}
+
+/* main */
+main {padding: 1em; min-height: calc(100vh - 256px);}
+
+main > * {padding: 16px; box-sizing: border-box; }
+main .content {height: 500px;  width: 768px; margin-right: 16px;}
+main aside {height: 300px; width: 384px;}
+
+/* main account */
+main .account {
+    box-shadow: 0 0 0 1px #e3e5e8, 0 1px 2px 0 rgba(0, 0, 0, .04); border-radius: 8px;
+    padding: 21px 20px 18px;
+}
+main .account {font-family:"맑은 고딕";}
+main .account p {margin: 0; text-align: center; font-size: 15px}
+main .account > a {
+    display: block; background-color: #03c75a; color: #fff; padding: 17px 0; margin-top: 13px;
+    border-radius: 4px; text-align: center; font-size: 14.7px;
+}
+main .account > a:hover {background-color: #17b75e;}
+main .account > a i {display: inline-block; width: 72px; height: 14px; margin: 3px 8px 0 0;
+    text-indent: -9999px; background: url('https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png') 0 -301px;
+    background-size: 463px 442px; vertical-align: top;
+}
+
+main .account > div {text-align: center; margin-top: 16px;}
+main .account > div a {font-size: 13.65px; color: #606060;}
+main .account > div a:hover {text-decoration: underline;}
+main .account > div i {display: inline-block; width: 1px; height: 12px; 
+    background-color: #d3d5d7; margin: 4px 12px 0; vertical-align: top;}
+main::after{display: block; content: ''; clear: both;}
+
+.attach-area i {cursor: pointer;} 
+.attach-thumb div div {background: no-repeat center;}
+
+
+/* misc */
+.arrow-area i {position: fixed; bottom: 100px; right: 100px; font-size: 3em; display: none;
+    border-radius: 50%; color: #888; transition: all .3s; background-color: #fff;}
+.arrow-area i:hover {box-shadow: 0 0 7px #ccc; color: #222;}

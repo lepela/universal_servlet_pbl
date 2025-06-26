@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%magenta(%d{HH:mm:ss.SSS}) %highlight(%-5level) %cyan(%logger:%line) - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="DAILY_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/app.log</file> <!-- 현재 로그를 쓰는 파일 -->
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<maxHistory>30</maxHistory>
+
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="SQL_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	      <pattern>%magenta(%d{HH:mm:ss.SSS}) %highlight(%-5level) %cyan(%logger{20}:%line)
+%boldRed([SQL]) 
+%msg%n
+	      </pattern>
+	    </encoder>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DAILY_FILE" />
+	</root>
+	<logger name="jdbc.sqlonly" level="WARN" additivity="false"/>
+	<logger name="jdbc.sqltiming" level="DEBUG"  additivity="false" >
+		<appender-ref  ref="SQL_CONSOLE" />
+	</logger>
+	<logger name="jdbc.resultsettable" level="INFO"  additivity="false" >
+		<appender-ref  ref="SQL_CONSOLE" />
+	</logger>
+	<logger name="jdbc.audit" level="WARN" additivity="false"/>
+	<logger name="jdbc.resultset" level="WARN" additivity="false"/>
+	<logger name="jdbc.connection" level="WARN" additivity="false"/>
+	<logger name="com.zaxxer.hikari" level="WARN" additivity="false"/>
+</configuration>

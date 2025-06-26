@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BoardMapper">
+	<resultMap type="board" id="b">
+		<id column="bno" property="bno"/>
+		<result column="title"  property="title" />
+		<result column="content" property="content" />
+		<result column="id"  property="id" />
+		<result column="regdate"  property="regdate" />
+		<result column="moddate"  property="moddate" />
+		<result column="cnt"  property="cnt" />
+		<result column="cno"  property="cno"  />
+		<result column="replyCnt"  property="replyCnt"  />
+		<result column="attachCnt"  property="attachCnt"  />
+		
+		<collection property="attachs" ofType="attach">
+			<result column="uuid" property="uuid"/>
+			<result column="path" property="path"/>
+			<result column="image" property="image"/>
+			<result column="origin" property="origin"/>
+			<result column="a_bno" property="bno"/>
+			<result column="odr" property="odr"/>
+			<result column="size" property="size"/>
+		</collection>
+	</resultMap>
+	<sql id="criteria">
+	<where>
+		<trim prefixOverrides="AND | OR">
+		<if test="cno != null">
+		and cno = #{cno}	
+		</if>
+		<if test="types != null">
+			<foreach collection="types" item="t" open="and (" close=")" separator="or">
+				<choose>
+					<when test="t eq 'T'.toString()">
+					title like concat('%', #{keyword} ,'%')
+					</when>
+					<when test="t eq 'C'.toString()">
+					content like concat('%', #{keyword} ,'%')
+					</when>
+					<when test="t eq 'I'.toString()">
+					id like concat('%', #{keyword} ,'%')
+					</when>
+				</choose>
+			</foreach>		
+		</if>
+		</trim>
+	</where>
+	</sql>
+
+	<!-- 목록 조회 -->
+	<select id="list" resultMap="b">
+	select bno, title, content, id, regdate, moddate, cnt, cno, 
+		(select count(*) from tbl_reply r where r.bno = b.bno) replyCnt,
+		(select count(*) from tbl_attach a where a.bno = b.bno) attachCnt,
+		(select uuid from tbl_attach a where a.bno = b.bno and image = 1 order by odr limit 1) uuid, 
+		(select path from tbl_attach a where a.bno = b.bno and image = 1 order by odr limit 1) path 
+	from tbl_board b
+	<include refid="criteria" />
+	order by bno desc 
+	limit #{amount} offset #{offset}
+	</select>
+	
+	<!-- 단일 조회 -->
+	<select id="selectOne" resultMap="b">
+	select *, a.bno a_bno
+	from tbl_board b
+	left join tbl_attach a using(bno)
+	where bno = #{bno}
+	</select>
+	
+	<!-- 글 등록 -->
+	<insert id="insert">
+	insert into tbl_board (title, content, id, cno) values (#{title}, #{content}, #{id}, #{cno})
+	<selectKey keyProperty="bno" resultType="long" order="AFTER">
+	select max(bno) from tbl_board
+	</selectKey>
+	</insert>
+	
+	<!-- 게시글 갯수 -->
+	<select id="getCount" resultType="long">
+	select count(*) from tbl_board 
+	<include refid="criteria" />
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+	update tbl_board set 
+	title = #{title},
+	content = #{content},
+	moddate = now(),
+	cno = #{cno}
+	where bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+	delete from tbl_board where bno = #{bno}
+	</delete>
+	
+	<update id="increseCnt">
+	update tbl_board SET 
+	cnt = cnt + 1
+	where bno = #{bno}
+	</update>
+</mapper>
