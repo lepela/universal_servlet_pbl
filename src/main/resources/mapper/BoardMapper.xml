@@ -65,10 +65,11 @@
 	
 	<!-- 단일 조회 -->
 	<select id="selectOne" resultMap="b">
-	select *, a.bno a_bno
+	select *, a.bno a_bno, (select count(*) from tbl_reply r where r.bno = b.bno) replyCnt
 	from tbl_board b
 	left join tbl_attach a using(bno)
 	where bno = #{bno}
+	order by odr
 	</select>
 	
 	<!-- 글 등록 -->

@@ -69,6 +69,28 @@
 
 ---
 
+#### 2025-06-27 내용
+##### 카테고리 작업
+  - enum타입 사용
+  - mybatis enum 적용 type handler 처리
+  - 카테고리의 유형 view_type (gallery, list, feed)
+  - 카테고리의 상태 status (active, disabled)
+  - 카테고리의 정보를 application 영역 객체에 바인딩 (성능 최적화)
+##### 갤러리형 게시판 
+  - UI변경
+  - 반응형, 카드형 갤러리 처리
+  - no image의 대체이미지 처리
+##### 첨부파일 변경시 순서 조정 기능 추가
+  - jqueryui - sortable()을 사용
+  - odr 재조정으로 화면에 보이게될 순서 재배치
+
+  - 게시글 목록에서 한번에 보여질 amount 드롭다운처리
+  - 검색어 유지 
+  - 미인증시 로그인 후 이전페이지
+
+  - 미첨부, 첨부 파일 관리 (ghost file) 
+  - 스케쥴러 적용예정
+
 ## 🧰 공통 유틸리티
 
 - `AlertUtils`: 스크립트 기반 알림 처리

@@ -35,4 +35,7 @@
 	<delete id="delete">
 	delete from tbl_reply where rno = #{rno}
 	</delete>
+	<delete id="deleteByBno">
+	delete from tbl_reply where bno = #{bno}
+	</delete>
 </mapper>

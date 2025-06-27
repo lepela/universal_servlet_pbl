@@ -7,11 +7,11 @@
 	</appender>
 	<appender name="DAILY_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>logs/app.log</file> <!-- 현재 로그를 쓰는 파일 -->
+		<file>./logs/app.log</file> <!-- 현재 로그를 쓰는 파일 -->
 
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>./logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
 
 			<maxHistory>30</maxHistory>
 

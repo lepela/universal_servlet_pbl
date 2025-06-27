@@ -51,7 +51,8 @@ main::after{display: block; content: ''; clear: both;}
 
 .attach-area i {cursor: pointer;} 
 .attach-thumb div div {background: no-repeat center;}
-
+.attach-list {cursor: grab;}
+.attach-list:active {cursor: grabbing;}
 
 /* misc */
 .arrow-area i {position: fixed; bottom: 100px; right: 100px; font-size: 3em; display: none;

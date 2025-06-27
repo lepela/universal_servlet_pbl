@@ -16,13 +16,21 @@
 <%@ include file="../common/nav.jsp" %>
 	<div class="container p-0">
          <main>
-            <div class="small border-bottom border-3 border-primary p-0 pb-2"><a href="#" class="small"><span class="text-primary">자유게시판</span> 카테고리</a></div>            
+            <div class="small border-bottom border-3 border-primary p-0 pb-2"><a href="#" class="small">
+            <span class="text-primary">
+            <c:forEach items="${cate}" var="c">
+    			<c:if test="${c.cno == cri.cno}">
+    			${c.cname}
+    			</c:if>
+    		</c:forEach>
+            </span> 
+            카테고리</a></div>            
             <div class="small p-0 py-2">
                 <span class="px-2 border-end border-1">잡담</span>
                 <span class="px-2">${board.title}</span>
                 <div class="float-end small">
                     <span class="text-muted"><i class="fa-solid fa-eye"></i> ${board.cnt}</span>
-                    <span class="text-muted"><i class="fa-regular fa-comment-dots"></i> 3</span>
+                    <span class="text-muted"><i class="fa-regular fa-comment-dots"></i> ${board.replyCnt}</span>
                 </div>
             </div>            
             <div class="p-0 py-2 bg-light small border-top border-2 border-muted">
