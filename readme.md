@@ -126,6 +126,7 @@
 
 ## 🚀 실행 환경 (개발용)
 
+이슈테스트
 ```properties
 # db.properties (외부 파일 분리, .gitignore 처리)
 jdbc.url=jdbc:mariadb://localhost:3306/pbl2
