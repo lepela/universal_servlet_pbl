@@ -15,6 +15,7 @@ import domain.dto.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import service.MemberService;
 import util.HikariCPUtil;
+import util.ParamUtil;
 
 @WebServlet("/member/login")
 @Slf4j
@@ -27,18 +28,14 @@ public class Login extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 1. 파라미터 수집
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		log.info("{} {}", id, pw);
-		// 2. service.login(id, pw)호출
-		boolean ret = new MemberService().login(id, pw);
+		Member member = ParamUtil.get(req, Member.class);
+		boolean ret = new MemberService().login(member.getId(), member.getPw());
 		log.info("{}", ret);
 		
 		if(ret) { // 로그인 성공
 			HttpSession session = req.getSession();
 			session.setMaxInactiveInterval(60 * 10);
-			session.setAttribute("member", new MemberService().findById(id));
+			session.setAttribute("member", new MemberService().findById(member.getId()));
 			
 			String url = req.getParameter("url");
 			if(url == null) {
@@ -49,8 +46,6 @@ public class Login extends HttpServlet{
 				Criteria cri = Criteria.init(req);
 				resp.sendRedirect(decodedUrl + "?" + cri.getQs2());
 			}
-			
-			// contextPath >> /pbl
 		}
 		else { // 로그인 실패
 			resp.sendRedirect("login?msg=fail");

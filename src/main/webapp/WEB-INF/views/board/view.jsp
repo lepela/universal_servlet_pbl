@@ -48,6 +48,10 @@
                 <a href="remove?bno=${board.bno}&${cri.qs2}" class="btn btn-danger btn-sm" onclick="return confirm('삭제하시겠습니까?')">
                 	<i class="fa-solid fa-trash-can"></i> 삭제
                 </a>
+                <a href="write?${cri.qs2}&bno=${board.bno}" class="btn btn-primary btn-sm">
+                	<i class="fa-solid fa-reply" style="transform:rotate(180deg); "></i> 
+                	답글
+                </a>
                 
                 <div class="float-end">
                     <button class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-share-nodes"></i> 공유</button>

@@ -21,4 +21,11 @@ public interface BoardMapper {
 	
 	void increseCnt(Long bno);
 
+	void updateGrpMyself(Board board);
+	
+	void updateSeqIncrease(Board parent);
+	
+	void insertChild(Board board);
+	
+	int selectMaxSeq(Board parent);
 }

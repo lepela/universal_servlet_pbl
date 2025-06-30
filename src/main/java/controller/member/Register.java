@@ -12,6 +12,7 @@ import domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import service.MemberService;
 import util.HikariCPUtil;
+import util.ParamUtil;
 
 @WebServlet("/member/register")
 @Slf4j
@@ -24,13 +25,7 @@ public class Register extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 1. 파라미터 수집
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		// 2. Member 인스턴스 생성
-		Member member = Member.builder().id(id).pw(pw).name(name).email(email).build();
+		Member member = ParamUtil.get(req, Member.class);
 		log.info("{}", member);
 		// 3. service.register(member)호출
 		new MemberService().register(member);

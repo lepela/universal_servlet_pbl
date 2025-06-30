@@ -53,6 +53,9 @@
             <input type="hidden" name="page" value="1" />
             <input type="hidden" name="amount" value="${cri.amount}" />
             <input type="hidden" name="encodedStr" value="">
+            <c:if test="${not empty param.bno}">
+            <input type="hidden" name="bno" value="${param.bno}" />
+            </c:if>
             </form>     
         </main>
     </div>
