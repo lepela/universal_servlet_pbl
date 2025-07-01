@@ -10,4 +10,6 @@ public interface AttachMapper {
 	Attach selectOne(String uuid);
 	void delete(String uuid);
 	void deleteByBno(Long bno);
+	
+	List<Attach> selectYesterdayList();
 }

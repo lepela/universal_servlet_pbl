@@ -25,4 +25,8 @@
 	<delete id="deleteByBno">
 	delete from tbl_attach where bno = #{bno}
 	</delete>
+	
+	<select id="selectYesterdayList" resultType="attach">
+	select * from tbl_attach ta where path = DATE_FORMAT(DATE_SUB(now(), INTERVAL 1 DAY), '%Y/%m/%d')
+	</select>
 </mapper>
