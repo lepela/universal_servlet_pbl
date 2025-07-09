@@ -6,6 +6,7 @@ import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.valves.rewrite.RewriteValve;
+import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -19,6 +19,7 @@
 	<span>${member.name} 님 환영합니다</span>
 	<a href="member/logout">로그아웃</a>
 	</c:if>
+	
 </main>
 <%@ include file="common/footer.jsp" %>
 

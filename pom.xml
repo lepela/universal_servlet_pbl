@@ -5,6 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  		</resource>
+  	</resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -98,6 +103,32 @@
     <groupId>org.quartz-scheduler</groupId>
     <artifactId>quartz</artifactId>
     <version>2.5.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>5.2.0</version>
+</dependency>
+	<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/aws-sdk-java -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>aws-sdk-java</artifactId>
+    <version>2.31.77</version>
+    <scope>provided</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/auth -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>auth</artifactId>
+    <version>2.31.77</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/s3 -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>s3</artifactId>
+    <version>2.31.77</version>
+    <scope>compile</scope>
 </dependency>
   </dependencies>  
 </project>

@@ -23,7 +23,6 @@
 			<result column="path" property="path"/>
 			<result column="image" property="image"/>
 			<result column="origin" property="origin"/>
-			<result column="a_bno" property="bno"/>
 			<result column="odr" property="odr"/>
 			<result column="size" property="size"/>
 		</collection>
@@ -57,9 +56,9 @@
 	<select id="list" resultMap="b">
 	select bno, title, content, id, regdate, moddate, cnt, cno, 
 		(select count(*) from tbl_reply r where r.bno = b.bno) replyCnt,
-		(select count(*) from tbl_attach a where a.bno = b.bno) attachCnt,
-		(select uuid from tbl_attach a where a.bno = b.bno and image = 1 order by odr limit 1) uuid, 
-		(select path from tbl_attach a where a.bno = b.bno and image = 1 order by odr limit 1) path,
+		(select count(*) from tbl_attach_link a where a.lno = b.bno and link_type = 'BOARD') attachCnt,
+		(select uuid from tbl_attach_re natural join tbl_attach_link where lno = bno and image = 1 order by odr limit 1) uuid, 
+		(select path from tbl_attach_re natural join tbl_attach_link where lno = bno and image = 1 order by odr limit 1) path,
 		grp, seq, depth 
 	from tbl_board b
 	<include refid="criteria" />
@@ -69,9 +68,10 @@
 	
 	<!-- 단일 조회 -->
 	<select id="selectOne" resultMap="b">
-	select *, a.bno a_bno, (select count(*) from tbl_reply r where r.bno = b.bno) replyCnt
-	from tbl_board b
-	left join tbl_attach a using(bno)
+	select *, (select count(*) from tbl_reply r where r.bno = tb.bno) replyCnt
+	from tbl_board tb
+	left join tbl_attach_link tal on tb.bno = tal.lno and link_type = 'BOARD'
+	left join tbl_attach_re tar using(uuid)
 	where bno = #{bno}
 	order by odr
 	</select>
